@@ -1,8 +1,21 @@
-<h1><%= @user.username %>'s Profile'</h1>
+<div class="container mt-4">
+  <h1><%= @user.username %>'s Profile</h1>
 
-<%= gravatar_for @user, size: 200 %>
+  <%= gravatar_for @user, size: 200 %>
 
-<h3>Articles</h3>
+  <h3>Articles</h3>
 
-
-<%= render 'articles/article' %>
+  <% if @user.articles.any? %>
+    <% @user.articles.each do |article| %>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title"><%= article.title %></h5>
+          <p class="card-text"><%= article.description %></p>
+          <%= link_to 'Read more', article_path(article), class: 'btn btn-primary' %>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p>No articles found for this user.</p>
+  <% end %>
+</div>

@@ -1,4 +1,18 @@
-<h1>about page</h1>
+<div class="container mt-4">
+  <h1>About Page</h1>
 
-<%= link_to 'Articles Listing', articles_path %>
-<%= link_to 'Home Page', root_path %>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <%= link_to 'Articles Listing', articles_path, class: 'nav-link' %>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <%= link_to 'Home Page', root_path, class: 'btn btn-primary' %>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
