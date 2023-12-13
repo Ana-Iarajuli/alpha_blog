@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, except: [:index, :show] # it's important to get ordering right. We check for logged in user here
+  before_action :require_same_user, only: [:edit, :update, :destroy] # then we check if logged in user is same user that created some articles
   def show
     # debugger
   end
@@ -48,6 +50,13 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:title, :description)
+  end
+
+  def require_same_user
+    if current_user != @article.user
+      flash[:alert] = "You can only edit or delete your own article"
+      redirect_to @article
+    end
   end
 
 end
